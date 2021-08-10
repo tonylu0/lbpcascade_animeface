@@ -31,23 +31,11 @@ def detect(filename, cascade_file = "../lbpcascade_animeface.xml"):
                                      scaleFactor = 1.1,
                                      minNeighbors = 5,
                                      minSize = (24, 24))
-    for (x, y, w, h) in faces:
-        cv2.rectangle(image, (x, y), (x + w, y + h), (0, 0, 255), 2)
-
-    cv2.imshow("AnimeFaceDetect", image)
-    cv2.waitKey(0)
-    cv2.imwrite("out.png", image)
-
-if len(sys.argv) != 2:
-    sys.stderr.write("usage: detect.py <filename>\n")
-    sys.exit(-1)
     
-detect(sys.argv[1])
+    for (x, y, w, h) in faces:
+        crop_img = image[y:y+h, x:x+w]
+        cv2.imwrite("out.png", crop_img)
 ```
-Run
-
-    python detect.py imas.jpg
-
 ![result](https://user-images.githubusercontent.com/287255/43184241-ed3f1af8-9022-11e8-8800-468b002c73d9.png)
 
 ## Note
