@@ -53,7 +53,7 @@ for filename in os.listdir(directory):
     file = os.path.join(directory, filename)
     detect(file)
  ```  
-![result](https://imgur.com/vURNvkj)
+![result](https://i.imgur.com/vURNvkj.png)
 
 ## Note
 I am providing similar project at https://github.com/nagadomi/animeface-2009. animeface-2009 is my original work that was made before libcascade_animeface. The detection accuracy is higher than this project. However, installation of that is a bit complicated. Also I am providing a face cropping script using animeface-2009.
