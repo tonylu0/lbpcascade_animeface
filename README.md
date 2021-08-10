@@ -36,9 +36,17 @@ def detect(filename, cascade_file = "lbpcascade_animeface.xml"):
         crop_img = image[y:y+h, x:x+w]
         cv2.imwrite(filename, crop_img)
 
-
-detect("input.png")
 ```
+Usage to crop folder
+```python
+import cv2
+import sys
+import os.path
+directory = 'Hibiki_crop'
+for filename in os.listdir(directory):
+    file = os.path.join(directory, filename)
+    detect(file)
+ ```  
 ![result](https://user-images.githubusercontent.com/287255/43184241-ed3f1af8-9022-11e8-8800-468b002c73d9.png)
 
 ## Note
