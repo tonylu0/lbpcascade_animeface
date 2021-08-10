@@ -17,7 +17,7 @@ import cv2
 import sys
 import os.path
 
-def detect(filename, cascade_file = "../lbpcascade_animeface.xml"):
+def detect(filename, cascade_file = "lbpcascade_animeface.xml"):
     if not os.path.isfile(cascade_file):
         raise RuntimeError("%s: not found" % cascade_file)
 
@@ -35,6 +35,9 @@ def detect(filename, cascade_file = "../lbpcascade_animeface.xml"):
     for (x, y, w, h) in faces:
         crop_img = image[y:y+h, x:x+w]
         cv2.imwrite("out.png", crop_img)
+
+
+detect("Z.png")
 ```
 ![result](https://user-images.githubusercontent.com/287255/43184241-ed3f1af8-9022-11e8-8800-468b002c73d9.png)
 
