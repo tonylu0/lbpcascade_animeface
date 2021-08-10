@@ -10,8 +10,8 @@ Download and place the cascade file into your project directory.
 
     wget https://raw.githubusercontent.com/nagadomi/lbpcascade_animeface/master/lbpcascade_animeface.xml
 
-### Python Example
-
+### Python Example to Crop and Delete images that failed to detect faces
+### Be sure to NOT use this on the original set of images
 ```python
 import cv2
 import sys
@@ -31,10 +31,16 @@ def detect(filename, cascade_file = "lbpcascade_animeface.xml"):
                                      scaleFactor = 1.1,
                                      minNeighbors = 5,
                                      minSize = (24, 24))
-    
+    flag = 0
     for (x, y, w, h) in faces:
         crop_img = image[y:y+h, x:x+w]
         cv2.imwrite(filename, crop_img)
+        flag = 1
+    
+    if (flag == 0) :
+        try: 
+            os.remove(filename)
+        except: pass
 
 ```
 Usage to crop folder
