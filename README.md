@@ -32,15 +32,35 @@ def detect(filename, cascade_file = "lbpcascade_animeface.xml"):
                                      minNeighbors = 5,
                                      minSize = (24, 24))
     flag = 0
+    count = 1
     for (x, y, w, h) in faces:
         crop_img = image[y:y+h, x:x+w]
-        cv2.imwrite(filename, crop_img)
+        if len(faces) > 1:
+            base = os.path.splitext(filename)[0]
+            extension = os.path.splitext(filename)[1]
+            newfilename = base + str(count) + extension
+            cv2.imwrite(newfilename, crop_img)
+        else:
+            cv2.imwrite(filename, crop_img)
         flag = 1
+        count += 1
+        
+    if len(faces) > 1:
+        try: 
+            os.remove(filename)
+        except: pass
     
     if (flag == 0) :
         try: 
             os.remove(filename)
         except: pass
+        
+# To produce red bounding box on faces
+    for (x, y, w, h) in faces:
+        cv2.rectangle(image, (x, y), (x + w, y + h), (0, 0, 255), 2)
+#     cv2.imshow("AnimeFaceDetect", image) #Opens window to show image
+#     cv2.waitKey(0)
+    cv2.imwrite("out.png", image)
 
 ```
 Usage to crop folder
